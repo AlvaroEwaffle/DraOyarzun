@@ -1,0 +1,87 @@
+---
+import Button from './ui/Button.astro';
+---
+
+<section id="cta-final" class="section-padding bg-gradient-to-br from-highlight/20 to-main/20 relative overflow-hidden">
+  <!-- Background decorative elements -->
+  <div class="absolute inset-0 overflow-hidden">
+    <div class="absolute top-10 left-10 w-32 h-32 bg-main/10 rounded-full animate-float"></div>
+    <div class="absolute top-20 right-20 w-24 h-24 bg-details/15 rounded-full animate-pulse-slow"></div>
+    <div class="absolute bottom-20 left-20 w-28 h-28 bg-accent/10 rounded-full animate-bounce-slow"></div>
+    <div class="absolute bottom-10 right-10 w-20 h-20 bg-highlight/15 rounded-full animate-float" style="animation-delay: 2s;"></div>
+  </div>
+
+  <div class="container-custom relative z-10">
+    <div class="max-w-4xl mx-auto text-center">
+      <div class="bg-white/90 backdrop-blur-sm rounded-3xl p-8 md:p-12 shadow-2xl">
+        <div class="mb-8">
+          <div class="w-20 h-20 mx-auto bg-gradient-to-br from-highlight to-main rounded-full flex items-center justify-center text-4xl mb-6">
+            ✨
+          </div>
+          
+          <h2 class="text-3xl md:text-4xl lg:text-5xl font-bold text-gray-900 mb-6">
+            ¿Lista para 
+            <span class="text-gradient">recuperar tu belleza</span>
+            <br>natural?
+          </h2>
+          
+          <p class="text-xl md:text-2xl text-gray-600 mb-8 max-w-3xl mx-auto leading-relaxed">
+            No esperes más. Tu mejor versión te está esperando. 
+            <strong>Agenda tu asesoría gratuita</strong> y descubre cómo podemos ayudarte a realzar tu belleza única.
+          </p>
+        </div>
+
+        <!-- CTA Button -->
+        <div class="flex justify-center mb-8">
+          <Button href="https://www.fidelidapp.cl/agendalanding/68c44056670f3153316c7f88" target="_blank" rel="noopener noreferrer" size="lg">
+            <span class="mr-2">🗓️</span>
+            Agenda tu evaluación gratuita
+          </Button>
+        </div>
+
+        <!-- Trust indicators -->
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-6 text-center">
+          <div class="flex flex-col items-center space-y-2">
+            <div class="w-12 h-12 bg-green-100 rounded-full flex items-center justify-center">
+              <svg class="w-6 h-6 text-green-600" fill="currentColor" viewBox="0 0 20 20">
+                <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"/>
+              </svg>
+            </div>
+            <div class="text-sm font-semibold text-gray-900">100% Gratuito</div>
+            <div class="text-xs text-gray-600">Sin compromiso</div>
+          </div>
+          
+          <div class="flex flex-col items-center space-y-2">
+            <div class="w-12 h-12 bg-blue-100 rounded-full flex items-center justify-center">
+              <svg class="w-6 h-6 text-blue-600" fill="currentColor" viewBox="0 0 20 20">
+                <path fill-rule="evenodd" d="M6.267 3.455a3.066 3.066 0 001.745-.723 3.066 3.066 0 013.976 0 3.066 3.066 0 001.745.723 3.066 3.066 0 012.812 2.812c.051.643.304 1.254.723 1.745a3.066 3.066 0 010 3.976 3.066 3.066 0 00-.723 1.745 3.066 3.066 0 01-2.812 2.812 3.066 3.066 0 00-1.745.723 3.066 3.066 0 01-3.976 0 3.066 3.066 0 00-1.745-.723 3.066 3.066 0 01-2.812-2.812 3.066 3.066 0 00-.723-1.745 3.066 3.066 0 010-3.976 3.066 3.066 0 00.723-1.745 3.066 3.066 0 012.812-2.812zm7.44 5.252a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"/>
+              </svg>
+            </div>
+            <div class="text-sm font-semibold text-gray-900">Garantía 30 días</div>
+            <div class="text-xs text-gray-600">Devolución total</div>
+          </div>
+          
+          <div class="flex flex-col items-center space-y-2">
+            <div class="w-12 h-12 bg-purple-100 rounded-full flex items-center justify-center">
+              <svg class="w-6 h-6 text-purple-600" fill="currentColor" viewBox="0 0 20 20">
+                <path d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/>
+              </svg>
+            </div>
+            <div class="text-sm font-semibold text-gray-900">13 años experiencia</div>
+            <div class="text-xs text-gray-600">Profesional certificada</div>
+          </div>
+        </div>
+
+        <!-- Contact info -->
+        <div class="mt-8 pt-6 border-t border-gray-200">
+          <p class="text-sm text-gray-600 mb-2">
+            <strong>Dra. Carolina Oyarzún</strong> • Especialista en Estética Facial
+          </p>
+          <p class="text-sm text-gray-500">
+            📍 Talca • 📞 +56 9 8603 0096 • 🌐 www.doctoraoyarzun.cl
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

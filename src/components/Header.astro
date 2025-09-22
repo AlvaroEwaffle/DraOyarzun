@@ -1,0 +1,96 @@
+---
+import Button from './ui/Button.astro';
+---
+
+<header class="hidden lg:block fixed top-0 left-0 right-0 bg-white/95 backdrop-blur-sm shadow-sm z-50">
+  <nav class="container-custom section-padding py-6 pt-8">
+    <div class="flex items-center justify-between">
+      <!-- Logo -->
+      <div class="flex items-center space-x-3">
+        <img src="/assets/Logo.png" alt="Dra. Oyarzún" class="h-12 w-auto" />
+        <div class="hidden sm:block">
+          <h1 class="text-xl font-bold text-gray-900">Dra. Oyarzún</h1>
+          <p class="text-sm text-gray-600">Estética Facial Talca</p>
+        </div>
+      </div>
+
+      <!-- Desktop Navigation -->
+      <div class="hidden lg:flex items-center space-x-8">
+  
+        
+        
+        
+        <Button href="https://www.fidelidapp.cl/agendalanding/68c44056670f3153316c7f88" target="_blank" rel="noopener noreferrer">
+          <span class="mr-2">🗓️</span>
+          Agenda tu consulta
+        </Button>
+      </div>
+
+      <!-- Mobile Menu Button -->
+      <button class="lg:hidden p-2 text-gray-700 hover:text-main transition-colors duration-300" id="mobile-menu-button">
+        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
+        </svg>
+      </button>
+    </div>
+
+    <!-- Mobile Menu -->
+    <div class="lg:hidden hidden mt-4 pb-4" id="mobile-menu">
+      <div class="space-y-2">
+        <div class="border-t pt-4">
+          <button class="w-full text-left px-4 py-2 text-gray-700 hover:text-main transition-colors duration-300" id="mobile-services-button">
+            Servicios
+          </button>
+          <div class="hidden mt-2 space-y-1" id="mobile-services-menu">
+            <a href="#rejuvenecimiento" class="block px-6 py-2 text-sm text-gray-600 hover:text-main transition-colors duration-200">
+              🌿 Rejuvenecimiento y regeneración cutánea
+            </a>
+            <a href="#arrugas" class="block px-6 py-2 text-sm text-gray-600 hover:text-main transition-colors duration-200">
+              ✨ Tratamientos de arrugas y expresión
+            </a>
+            <a href="#rellenos" class="block px-6 py-2 text-sm text-gray-600 hover:text-main transition-colors duration-200">
+              💎 Rellenos y armonización facial
+            </a>
+            <a href="#contorno" class="block px-6 py-2 text-sm text-gray-600 hover:text-main transition-colors duration-200">
+              🎯 Tratamientos de contorno
+            </a>
+          </div>
+        </div>
+        <a href="#contacto" class="block px-4 py-2 text-gray-700 hover:text-main transition-colors duration-300">
+          Contacto
+        </a>
+        <div class="px-4 pt-2">
+          <Button href="https://www.fidelidapp.cl/agendalanding/68c44056670f3153316c7f88" target="_blank" rel="noopener noreferrer" class="w-full justify-center">
+            <span class="mr-2">🗓️</span>
+            Agenda tu consulta
+          </Button>
+        </div>
+      </div>
+    </div>
+  </nav>
+</header>
+
+<script>
+  // Mobile menu functionality
+  const mobileMenuButton = document.getElementById('mobile-menu-button');
+  const mobileMenu = document.getElementById('mobile-menu');
+  const mobileServicesButton = document.getElementById('mobile-services-button');
+  const mobileServicesMenu = document.getElementById('mobile-services-menu');
+
+  mobileMenuButton?.addEventListener('click', () => {
+    mobileMenu?.classList.toggle('hidden');
+  });
+
+  mobileServicesButton?.addEventListener('click', () => {
+    mobileServicesMenu?.classList.toggle('hidden');
+  });
+
+  // Close mobile menu when clicking on a link
+  const mobileLinks = mobileMenu?.querySelectorAll('a');
+  mobileLinks?.forEach(link => {
+    link.addEventListener('click', () => {
+      mobileMenu?.classList.add('hidden');
+      mobileServicesMenu?.classList.add('hidden');
+    });
+  });
+</script>

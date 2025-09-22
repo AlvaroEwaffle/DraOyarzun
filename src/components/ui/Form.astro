@@ -1,0 +1,13 @@
+---
+export interface Props {
+  action?: string;
+  method?: 'GET' | 'POST';
+  class?: string;
+}
+
+const { action = '#', method = 'POST', class: className = '', ...props } = Astro.props;
+---
+
+<form action={action} method={method} class={`space-y-4 ${className}`} {...props}>
+  <slot />
+</form>

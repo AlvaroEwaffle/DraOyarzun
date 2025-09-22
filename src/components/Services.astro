@@ -1,0 +1,125 @@
+---
+import Card from './ui/Card.astro';
+import Button from './ui/Button.astro';
+import { services } from '../data/services.js';
+---
+
+<section id="servicios" class="section-padding bg-white">
+  <div class="container-custom">
+    <div class="text-center mb-16 animate-on-scroll">
+      <h2 class="text-3xl md:text-4xl font-bold text-gray-900 mb-4">
+        Nuestros 
+        <span class="text-gradient">Servicios</span>
+      </h2>
+      <p class="text-xl text-gray-600 max-w-3xl mx-auto">
+        Tratamientos especializados en estética facial para realzar tu belleza natural
+      </p>
+    </div>
+
+    <!-- Service Tabs -->
+    <div class="mb-12">
+      <div class="flex flex-wrap justify-center gap-2 mb-8 animate-on-scroll">
+        {services.map((service, index) => (
+          <button 
+            class={`px-6 py-3 rounded-full font-semibold transition-all duration-300 ${
+              index === 0 
+                ? 'bg-highlight text-white shadow-lg' 
+                : 'bg-gray-100 text-gray-700 hover:bg-main hover:text-white'
+            }`}
+            data-tab={service.id}
+            data-service-index={index}
+            style={`animation-delay: ${index * 0.1}s`}
+          >
+            <span class="mr-2">{service.icon}</span>
+            {service.title}
+          </button>
+        ))}
+      </div>
+
+      <!-- Service Content -->
+      {services.map((service, index) => (
+        <div 
+          class={`service-content ${index === 0 ? 'block' : 'hidden'} animate-on-scroll`}
+          data-content={service.id}
+        >
+          <Card class="max-w-4xl mx-auto">
+            <div class="grid md:grid-cols-2 gap-8 items-center">
+              <div>
+                <div class="flex items-center mb-4">
+                  <span class="text-4xl mr-4">{service.icon}</span>
+                  <h3 class="text-2xl font-bold text-gray-900">
+                    {service.title}
+                  </h3>
+                </div>
+                
+                <p class="text-gray-600 mb-6 leading-relaxed">
+                  {service.description}
+                </p>
+                
+                <div class="space-y-3 mb-8">
+                  {service.services.map((serviceItem) => (
+                    <div class="flex items-center space-x-3">
+                      <div class="w-2 h-2 bg-highlight rounded-full"></div>
+                      <span class="text-gray-700">{serviceItem}</span>
+                    </div>
+                  ))}
+                </div>
+                
+                <Button href="https://www.fidelidapp.cl/agendalanding/68c44056670f3153316c7f88" target="_blank" rel="noopener noreferrer">
+                  Consultar sobre este tratamiento
+                </Button>
+              </div>
+              
+                  <div class="relative">
+                    <img
+                      src={`/assets/Services/Image0${index + 1}.jpeg`}
+                      alt={service.title}
+                      class="w-full aspect-square object-cover rounded-2xl shadow-lg"
+                    />
+
+                    <!-- Decorative elements -->
+                    <div class="absolute -top-4 -right-4 w-16 h-16 bg-highlight/20 rounded-full animate-pulse-slow"></div>
+                    <div class="absolute -bottom-4 -left-4 w-12 h-12 bg-main/30 rounded-full animate-float"></div>
+                  </div>
+            </div>
+          </Card>
+        </div>
+      ))}
+    </div>
+
+
+  </div>
+</section>
+
+<script>
+  // Tab functionality
+  const tabButtons = document.querySelectorAll('[data-tab]');
+  const serviceContents = document.querySelectorAll('.service-content');
+
+  tabButtons.forEach(button => {
+    button.addEventListener('click', () => {
+      const targetTab = button.getAttribute('data-tab');
+      
+      // Remove active class from all buttons
+      tabButtons.forEach(btn => {
+        btn.className = btn.className.replace('bg-highlight text-white shadow-lg', 'bg-gray-100 text-gray-700 hover:bg-main hover:text-white');
+      });
+      
+      // Add active class to clicked button
+      button.className = button.className.replace('bg-gray-100 text-gray-700 hover:bg-main hover:text-white', 'bg-highlight text-white shadow-lg');
+      
+      // Hide all content
+      serviceContents.forEach(content => {
+        content.classList.add('hidden');
+        content.classList.remove('block');
+      });
+      
+      // Show target content
+      const targetContent = document.querySelector(`[data-content="${targetTab}"]`);
+      if (targetContent) {
+        targetContent.classList.remove('hidden');
+        targetContent.classList.add('block');
+      }
+    });
+  });
+</script>

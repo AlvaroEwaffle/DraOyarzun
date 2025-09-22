@@ -1,0 +1,188 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import Header from '../../components/Header.astro';
+import Footer from '../../components/Footer.astro';
+import Button from '../../components/ui/Button.astro';
+import Card from '../../components/ui/Card.astro';
+import { services } from '../../data/services.js';
+
+export async function getStaticPaths() {
+  return services.map((service) => ({
+    params: { service: service.id },
+    props: { service },
+  }));
+}
+
+const { service } = Astro.props;
+---
+
+<Layout title={`${service.title} - Dra. Oyarzún`} description={service.description}>
+  <Header />
+  
+  <main class="lg:pt-8">
+    <!-- Hero Section -->
+    <section class="section-padding bg-gradient-custom">
+      <div class="container-custom">
+        <div class="max-w-4xl mx-auto text-center">
+          <div class="mb-8">
+            <div class="w-24 h-24 mx-auto bg-gradient-to-br from-main/20 to-details/20 rounded-full flex items-center justify-center text-5xl mb-6">
+              {service.icon}
+            </div>
+            <h1 class="text-4xl md:text-5xl font-bold text-gray-900 mb-6">
+              {service.title}
+            </h1>
+            <p class="text-xl text-gray-600 max-w-3xl mx-auto leading-relaxed">
+              {service.description}
+            </p>
+          </div>
+          
+          <Button href="https://www.fidelidapp.cl/agendalanding/68c44056670f3153316c7f88" target="_blank" rel="noopener noreferrer" size="lg">
+            <span class="mr-2">🗓️</span>
+            Consultar sobre este tratamiento
+          </Button>
+        </div>
+      </div>
+    </section>
+
+    <!-- Services List -->
+    <section class="section-padding bg-white">
+      <div class="container-custom">
+        <div class="max-w-4xl mx-auto">
+          <h2 class="text-3xl font-bold text-gray-900 text-center mb-12">
+            Tratamientos incluidos
+          </h2>
+          
+          <div class="grid md:grid-cols-2 gap-6">
+            {service.services.map((serviceItem) => (
+              <Card class="text-center group hover:scale-105 transition-all duration-300">
+                <div class="w-16 h-16 mx-auto bg-gradient-to-br from-main/20 to-details/20 rounded-full flex items-center justify-center text-3xl mb-4 group-hover:scale-110 transition-transform duration-300">
+                  {service.icon}
+                </div>
+                <h3 class="text-xl font-semibold text-gray-900 mb-2">
+                  {serviceItem}
+                </h3>
+                <p class="text-gray-600 text-sm">
+                  Tratamiento especializado con productos de la más alta calidad
+                </p>
+              </Card>
+            ))}
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Benefits Section -->
+    <section class="section-padding bg-gradient-to-br from-main/5 to-details/10">
+      <div class="container-custom">
+        <div class="max-w-4xl mx-auto">
+          <h2 class="text-3xl font-bold text-gray-900 text-center mb-12">
+            ¿Por qué elegir este tratamiento?
+          </h2>
+          
+          <div class="grid md:grid-cols-2 gap-8">
+            <Card>
+              <div class="flex items-start space-x-4">
+                <div class="w-12 h-12 bg-highlight/20 rounded-full flex items-center justify-center flex-shrink-0">
+                  <svg class="w-6 h-6 text-highlight" fill="currentColor" viewBox="0 0 20 20">
+                    <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"/>
+                  </svg>
+                </div>
+                <div>
+                  <h3 class="text-lg font-semibold text-gray-900 mb-2">
+                    Resultados Naturales
+                  </h3>
+                  <p class="text-gray-600">
+                    Respetamos tu esencia única, realzando tu belleza de forma natural y armoniosa.
+                  </p>
+                </div>
+              </div>
+            </Card>
+            
+            <Card>
+              <div class="flex items-start space-x-4">
+                <div class="w-12 h-12 bg-highlight/20 rounded-full flex items-center justify-center flex-shrink-0">
+                  <svg class="w-6 h-6 text-highlight" fill="currentColor" viewBox="0 0 20 20">
+                    <path fill-rule="evenodd" d="M6.267 3.455a3.066 3.066 0 001.745-.723 3.066 3.066 0 013.976 0 3.066 3.066 0 001.745.723 3.066 3.066 0 012.812 2.812c.051.643.304 1.254.723 1.745a3.066 3.066 0 010 3.976 3.066 3.066 0 00-.723 1.745 3.066 3.066 0 01-2.812 2.812 3.066 3.066 0 00-1.745.723 3.066 3.066 0 01-3.976 0 3.066 3.066 0 00-1.745-.723 3.066 3.066 0 01-2.812-2.812 3.066 3.066 0 00-.723-1.745 3.066 3.066 0 010-3.976 3.066 3.066 0 00.723-1.745 3.066 3.066 0 012.812-2.812zm7.44 5.252a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"/>
+                  </svg>
+                </div>
+                <div>
+                  <h3 class="text-lg font-semibold text-gray-900 mb-2">
+                    Productos Certificados
+                  </h3>
+                  <p class="text-gray-600">
+                    Utilizamos únicamente productos de la más alta calidad, certificados y seguros.
+                  </p>
+                </div>
+              </div>
+            </Card>
+            
+            <Card>
+              <div class="flex items-start space-x-4">
+                <div class="w-12 h-12 bg-highlight/20 rounded-full flex items-center justify-center flex-shrink-0">
+                  <svg class="w-6 h-6 text-highlight" fill="currentColor" viewBox="0 0 20 20">
+                    <path d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/>
+                  </svg>
+                </div>
+                <div>
+                  <h3 class="text-lg font-semibold text-gray-900 mb-2">
+                    Experiencia Profesional
+                  </h3>
+                  <p class="text-gray-600">
+                    13 años de experiencia en odontología y especialización en estética facial.
+                  </p>
+                </div>
+              </div>
+            </Card>
+            
+            <Card>
+              <div class="flex items-start space-x-4">
+                <div class="w-12 h-12 bg-highlight/20 rounded-full flex items-center justify-center flex-shrink-0">
+                  <svg class="w-6 h-6 text-highlight" fill="currentColor" viewBox="0 0 20 20">
+                    <path fill-rule="evenodd" d="M3 4a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zm0 4a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zm0 4a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zm0 4a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1z" clip-rule="evenodd"/>
+                  </svg>
+                </div>
+                <div>
+                  <h3 class="text-lg font-semibold text-gray-900 mb-2">
+                    Acompañamiento Personal
+                  </h3>
+                  <p class="text-gray-600">
+                    Te acompañamos en cada paso del proceso, desde la consulta hasta el resultado final.
+                  </p>
+                </div>
+              </div>
+            </Card>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- CTA Section -->
+    <section class="section-padding bg-gradient-to-r from-highlight/10 to-main/10">
+      <div class="container-custom">
+        <div class="max-w-4xl mx-auto text-center">
+          <Card class="bg-white/90 backdrop-blur-sm">
+            <h2 class="text-3xl font-bold text-gray-900 mb-4">
+              ¿Lista para comenzar?
+            </h2>
+            <p class="text-xl text-gray-600 mb-8">
+              Agenda tu asesoría gratuita y descubre cómo este tratamiento puede ayudarte a realzar tu belleza natural.
+            </p>
+            
+            <div class="flex flex-col sm:flex-row gap-4 justify-center">
+              <Button href="https://www.fidelidapp.cl/agendalanding/68c44056670f3153316c7f88" target="_blank" rel="noopener noreferrer" size="lg">
+                <span class="mr-2">🗓️</span>
+                Consultar por WhatsApp
+              </Button>
+              
+              <Button variant="secondary" href="/" size="lg">
+                Volver al inicio
+              </Button>
+            </div>
+          </Card>
+        </div>
+      </div>
+    </section>
+  </main>
+  
+  <Footer />
+</Layout>

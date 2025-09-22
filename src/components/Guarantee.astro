@@ -1,0 +1,115 @@
+---
+import Card from './ui/Card.astro';
+import Button from './ui/Button.astro';
+---
+
+<section id="garantia" class="section-padding bg-white">
+  <div class="container-custom">
+    <div class="max-w-4xl mx-auto">
+      <Card class="bg-gradient-to-r from-green-50 to-emerald-50 border-2 border-green-200">
+        <div class="text-center">
+          <div class="w-24 h-24 mx-auto bg-gradient-to-br from-green-500 to-emerald-600 rounded-full flex items-center justify-center text-4xl mb-6">
+            🛡️
+          </div>
+          
+          <h2 class="text-3xl md:text-4xl font-bold text-gray-900 mb-4">
+            <span class="text-green-600">Garantía de Satisfacción</span>
+          </h2>
+          
+          <p class="text-xl text-gray-600 mb-8 max-w-3xl mx-auto">
+            Estamos tan seguros de la calidad de nuestros tratamientos que te ofrecemos una garantía única en el mercado.
+          </p>
+        </div>
+
+        <div class="grid md:grid-cols-2 gap-8 items-center">
+          <!-- Guarantee Details -->
+          <div class="space-y-6">
+
+            <div class="bg-white rounded-xl p-6 shadow-sm border border-green-100">
+              <div class="flex items-start space-x-4">
+                <div class="w-12 h-12 bg-green-100 rounded-full flex items-center justify-center flex-shrink-0">
+                  <svg class="w-6 h-6 text-green-600" fill="currentColor" viewBox="0 0 20 20">
+                    <path fill-rule="evenodd" d="M6.267 3.455a3.066 3.066 0 001.745-.723 3.066 3.066 0 013.976 0 3.066 3.066 0 001.745.723 3.066 3.066 0 012.812 2.812c.051.643.304 1.254.723 1.745a3.066 3.066 0 010 3.976 3.066 3.066 0 00-.723 1.745 3.066 3.066 0 01-2.812 2.812 3.066 3.066 0 00-1.745.723 3.066 3.066 0 01-3.976 0 3.066 3.066 0 00-1.745-.723 3.066 3.066 0 01-2.812-2.812 3.066 3.066 0 00-.723-1.745 3.066 3.066 0 010-3.976 3.066 3.066 0 00.723-1.745 3.066 3.066 0 012.812-2.812zm7.44 5.252a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"/>
+                  </svg>
+                </div>
+                <div>
+                  <h3 class="text-lg font-semibold text-gray-900 mb-2">
+                    Productos certificados
+                  </h3>
+                  <p class="text-gray-600">
+                    Utilizamos únicamente productos de la más alta calidad, 
+                    certificados y aprobados por las autoridades sanitarias.
+                  </p>
+                </div>
+              </div>
+            </div>
+
+            <div class="bg-white rounded-xl p-6 shadow-sm border border-green-100">
+              <div class="flex items-start space-x-4">
+                <div class="w-12 h-12 bg-green-100 rounded-full flex items-center justify-center flex-shrink-0">
+                  <svg class="w-6 h-6 text-green-600" fill="currentColor" viewBox="0 0 20 20">
+                    <path d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/>
+                  </svg>
+                </div>
+                <div>
+                  <h3 class="text-lg font-semibold text-gray-900 mb-2">
+                    Profesional certificada
+                  </h3>
+                  <p class="text-gray-600">
+                    La Dra. Oyarzún cuenta con 13 años de experiencia y 
+                    certificaciones en estética facial y armonización.
+                  </p>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Visual Element -->
+          <div class="relative">
+            <div class="bg-gradient-to-br from-green-100 to-emerald-100 rounded-2xl p-8 text-center">
+              <div class="text-6xl mb-4">💎</div>
+              <h3 class="text-2xl font-bold text-gray-900 mb-4">
+                Tu tranquilidad es nuestra prioridad
+              </h3>
+              <p class="text-gray-600 mb-6">
+                Sabemos que tomar la decisión de realizarte un tratamiento estético puede generar dudas. 
+                Por eso, eliminamos cualquier riesgo para ti.
+              </p>
+              
+              <div class="space-y-3 text-left">
+                <div class="flex items-center space-x-3">
+                  <div class="w-2 h-2 bg-green-500 rounded-full"></div>
+                  <span class="text-gray-700">Procedimientos seguros</span>
+                </div>
+                <div class="flex items-center space-x-3">
+                  <div class="w-2 h-2 bg-green-500 rounded-full"></div>
+                  <span class="text-gray-700">Acompañamiento personal</span>
+                </div>
+                <div class="flex items-center space-x-3">
+                  <div class="w-2 h-2 bg-green-500 rounded-full"></div>
+                  <span class="text-gray-700">Resultados garantizados</span>
+                </div>
+              </div>
+            </div>
+            
+            <!-- Decorative elements -->
+            <div class="absolute -top-4 -right-4 w-16 h-16 bg-green-200/50 rounded-full animate-pulse-slow"></div>
+            <div class="absolute -bottom-4 -left-4 w-12 h-12 bg-emerald-200/50 rounded-full animate-float"></div>
+          </div>
+        </div>
+
+        <!-- CTA -->
+        <div class="text-center mt-8">
+          <p class="text-lg text-gray-700 mb-6">
+            <strong>¿Lista para dar el primer paso?</strong><br>
+            Agenda tu asesoría gratuita y descubre cómo podemos ayudarte.
+          </p>
+          <Button href="https://www.fidelidapp.cl/agendalanding/68c44056670f3153316c7f88" target="_blank" rel="noopener noreferrer" size="lg">
+            <span class="mr-2">🗓️</span>
+            Agenda tu asesoría gratuita
+          </Button>
+        </div>
+      </Card>
+    </div>
+  </div>
+</section>
