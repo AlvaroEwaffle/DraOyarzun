@@ -1,9 +1,11 @@
 ---
 export interface Props {
-  variant?: 'primary' | 'secondary';
+  variant?: 'primary' | 'secondary' | 'outline';
   size?: 'sm' | 'md' | 'lg';
   href?: string;
   class?: string;
+  target?: string;
+  rel?: string;
 }
 
 const { 
@@ -11,13 +13,16 @@ const {
   size = 'md', 
   href,
   class: className = '',
+  target,
+  rel,
   ...props 
 } = Astro.props;
 
 const baseClasses = 'inline-flex items-center justify-center font-semibold rounded-full transition-all duration-300 transform hover:scale-105 shadow-lg hover:shadow-xl';
 const variantClasses = {
   primary: 'bg-highlight hover:bg-blue-400 text-white',
-  secondary: 'bg-main hover:bg-hover text-gray-800'
+  secondary: 'bg-main hover:bg-hover text-gray-800',
+  outline: 'border-2 border-main hover:bg-main text-main hover:text-gray-800 bg-transparent'
 };
 const sizeClasses = {
   sm: 'py-2 px-6 text-sm',
@@ -29,7 +34,7 @@ const classes = `${baseClasses} ${variantClasses[variant]} ${sizeClasses[size]} 
 ---
 
 {href ? (
-  <a href={href} class={classes} {...props}>
+  <a href={href} class={classes} target={target} rel={rel} {...props}>
     <slot />
   </a>
 ) : (
