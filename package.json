@@ -10,6 +10,7 @@
     "deploy": "npm run build && wrangler pages deploy ./dist --project-name=draoyarzun"
   },
   "dependencies": {
+    "@astrojs/sitemap": "^3.6.0",
     "@astrojs/tailwind": "^6.0.2",
     "astro": "^5.13.5",
     "tailwindcss": "^3.4.17"
