@@ -7,7 +7,7 @@
     "build": "astro build",
     "preview": "astro preview",
     "astro": "astro",
-    "deploy": "npm run build && wrangler pages deploy ./dist --project-name=draoyarzun"
+    "deploy": "npm run build && wrangler pages deploy ./dist --project-name=draoyarzunlanding"
   },
   "dependencies": {
     "@astrojs/sitemap": "^3.6.0",
