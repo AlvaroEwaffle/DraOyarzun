@@ -70,13 +70,23 @@ const { title, description = "Dra. Carolina Oyarzún - Especialista en Estética
     <meta property="twitter:title" content={title} />
     <meta property="twitter:description" content={description} />
     <meta property="twitter:image" content="https://www.doctoraoyarzun.cl/og-image.jpg" />
-    <script async src="https://www.googletagmanager.com/gtag/js?id=AW-17699134412"></script> <script> window.dataLayer = window.dataLayer || []; function gtag(){dataLayer.push(arguments);} gtag('js', new Date()); gtag('config', 'AW-17699134412'); </script>
     <!-- WhatsApp -->
     <meta name="whatsapp" content="+56986030096" />
+    <!-- Google Tag Manager -->
+
+<script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+  new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+  j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+  'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+  })(window,document,'script','dataLayer','GTM-P5QJGDBM');</script>
+  <!-- End Google Tag Manager -->
   </head>
   <body class="bg-white text-gray-900">
     <slot />
-    
+    <!-- Google Tag Manager (noscript) -->
+<noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-P5QJGDBM"
+  height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+  <!-- End Google Tag Manager (noscript) -->
     <!-- Floating WhatsApp Button -->
     <div class="fixed bottom-6 right-6 z-50">
       <a
