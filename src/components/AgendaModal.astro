@@ -1,0 +1,221 @@
+---
+// Modal con la agenda embebida de fidelidapp (mismo enfoque "bare" que el BookingSheet
+// del car wash, probado en mobile). El iframe LLENA el área del sheet y su propio
+// documento scrollea de forma nativa (funciona con touch). NO usamos auto-resize.
+//
+// El embed de fidelidapp, cuando corre dentro de un iframe, oculta su barra de botones
+// nativa y espera que el "padre" renderice los botones proxy (Continuar / Ver Horarios /
+// Atrás) y se los reenvíe por postMessage.
+//
+// Cualquier elemento con el atributo `data-agenda-open` abre este modal.
+//
+// Usamos la URL directa de la agenda (/agendas/<id>) para ir directo a la selección de
+// servicios, saltando la landing. Dentro de un iframe NO redirige a home (el guard solo
+// actúa fuera de iframe), por eso funciona embebido aunque a nivel top redirija.
+const agendaUrl = "https://www.fidelidapp.cl/agendas/68c44203670f3153316ca0fe";
+---
+
+<!-- Estructura igual a la del car wash (SAT): overlay y sheet como hermanos `fixed`,
+     sin una capa `absolute` anidada extra (que dispara el bug de hit-testing táctil
+     con iframes cross-origin). El wrapper solo sirve para mostrar/ocultar todo. -->
+<div id="agenda-modal" class="hidden" role="dialog" aria-modal="true" aria-label="Agenda tu consulta">
+  <!-- Overlay -->
+  <div
+    id="agenda-overlay"
+    class="fixed inset-0 z-[90] bg-black/50 opacity-0 transition-opacity duration-200"
+  ></div>
+
+  <!-- Sheet: bottom-sheet a lo ancho, altura fija (el iframe llena y scrollea nativo) -->
+  <div
+    id="agenda-sheet"
+    class="fixed bottom-0 left-0 right-0 z-[100] w-full flex flex-col bg-white rounded-t-2xl shadow-2xl translate-y-full transition-transform duration-300 ease-out"
+    style="height: 92dvh; max-height: 92dvh;"
+  >
+    <!-- Handle (swipe-to-close en mobile) -->
+    <div id="agenda-handle" class="flex-shrink-0 pt-3 pb-2 cursor-grab active:cursor-grabbing touch-none">
+      <div class="w-8 h-1 bg-gray-300 rounded-full mx-auto"></div>
+    </div>
+
+    <!-- Header -->
+    <div class="flex-shrink-0 flex items-center justify-between px-5 pb-3 border-b border-gray-100">
+      <div>
+        <p class="font-bold text-gray-900 text-base leading-tight">Agenda tu consulta</p>
+        <p class="text-xs text-gray-400 mt-0.5">Dra. Carolina Oyarzún · Talca</p>
+      </div>
+      <button
+        id="agenda-close"
+        type="button"
+        class="w-9 h-9 bg-gray-100 rounded-full flex items-center justify-center hover:bg-gray-200 transition-colors"
+        aria-label="Cerrar"
+      >
+        <svg class="w-4 h-4 text-gray-600" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" />
+        </svg>
+      </button>
+    </div>
+
+    <!-- Área del iframe: lo llena; su propio documento (min-h-screen) scrollea de forma
+         nativa (touch en mobile). Estructura idéntica al car wash. -->
+    <div id="agenda-scroll" class="relative flex-1 min-h-0 overflow-hidden">
+      <iframe
+        id="agenda-iframe"
+        data-src={agendaUrl}
+        title="Agenda de reservas - Dra. Carolina Oyarzún"
+        class="bg-white"
+        style="width: 100%; height: 100%; border: 0;"
+        allow="payment"
+        loading="lazy"
+      ></iframe>
+    </div>
+
+    <!-- Barra de botones proxy (Atrás + Acción) — reflejan los del embed de fidelidapp -->
+    <div
+      id="agenda-actions"
+      class="flex-shrink-0 hidden items-center gap-3 px-5 py-3 border-t border-gray-100 bg-white"
+    >
+      <button
+        id="agenda-back"
+        type="button"
+        class="hidden flex-shrink-0 rounded-xl border border-gray-200 px-4 py-3.5 font-bold text-sm text-gray-900 active:opacity-70 transition-opacity"
+        aria-label="Volver al paso anterior"
+      >
+        Atrás
+      </button>
+      <button
+        id="agenda-action"
+        type="button"
+        class="hidden flex-1 bg-pink-500 hover:bg-pink-600 text-white font-bold rounded-xl py-3.5 text-sm shadow-sm disabled:bg-gray-200 disabled:text-gray-400 disabled:shadow-none disabled:cursor-not-allowed active:opacity-80 transition-colors"
+      >
+        Continuar
+      </button>
+    </div>
+  </div>
+</div>
+
+<script>
+  const modal = document.getElementById('agenda-modal');
+  const overlay = document.getElementById('agenda-overlay');
+  const sheet = document.getElementById('agenda-sheet');
+  const iframe = document.getElementById('agenda-iframe') as HTMLIFrameElement | null;
+  const closeBtn = document.getElementById('agenda-close');
+  const handle = document.getElementById('agenda-handle');
+  const actionsBar = document.getElementById('agenda-actions');
+  const backBtn = document.getElementById('agenda-back') as HTMLButtonElement | null;
+  const actionBtn = document.getElementById('agenda-action') as HTMLButtonElement | null;
+  const whatsappFloat = document.getElementById('whatsapp-float');
+
+  let loaded = false;
+  let hasAction = false;
+  let backVisible = false;
+  let modalInsideOpen = false;
+
+  function post(type: string) {
+    iframe?.contentWindow?.postMessage({ type }, '*');
+  }
+
+  function refreshActionsBar() {
+    if (!actionsBar) return;
+    const show = (hasAction || backVisible) && !modalInsideOpen;
+    actionsBar.classList.toggle('hidden', !show);
+    actionsBar.classList.toggle('flex', show);
+    backBtn?.classList.toggle('hidden', !(backVisible && !modalInsideOpen));
+    actionBtn?.classList.toggle('hidden', !(hasAction && !modalInsideOpen));
+  }
+
+  function openAgenda() {
+    if (!modal) return;
+    if (!loaded && iframe?.dataset.src) {
+      iframe.src = iframe.dataset.src;
+      loaded = true;
+    }
+    modal.classList.remove('hidden');
+    document.body.style.overflow = 'hidden';
+    whatsappFloat?.classList.add('hidden');
+    void modal.offsetHeight; // reflow para animar
+    overlay?.classList.remove('opacity-0');
+    sheet?.classList.remove('translate-y-full');
+  }
+
+  function closeAgenda() {
+    if (!modal) return;
+    overlay?.classList.add('opacity-0');
+    sheet?.classList.add('translate-y-full');
+    document.body.style.overflow = '';
+    whatsappFloat?.classList.remove('hidden');
+    hasAction = false;
+    backVisible = false;
+    modalInsideOpen = false;
+    refreshActionsBar();
+    setTimeout(() => modal.classList.add('hidden'), 300);
+  }
+
+  // Abrir desde cualquier botón marcado
+  document.querySelectorAll('[data-agenda-open]').forEach((el) => {
+    el.addEventListener('click', (e) => {
+      e.preventDefault();
+      openAgenda();
+    });
+  });
+
+  overlay?.addEventListener('click', closeAgenda);
+  closeBtn?.addEventListener('click', closeAgenda);
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape' && !modal?.classList.contains('hidden')) closeAgenda();
+  });
+
+  // Botones proxy → reenviar al iframe
+  actionBtn?.addEventListener('click', () => post('fidelidapp:action:trigger'));
+  backBtn?.addEventListener('click', () => post('fidelidapp:back:trigger'));
+
+  // Mensajes desde el embed de fidelidapp
+  window.addEventListener('message', (e: MessageEvent) => {
+    const data = e.data;
+    if (!data || typeof data.type !== 'string') return;
+    switch (data.type) {
+      case 'fidelidapp:action':
+        hasAction = true;
+        if (actionBtn) {
+          actionBtn.textContent = data.label || 'Continuar';
+          actionBtn.disabled = !!data.disabled;
+        }
+        refreshActionsBar();
+        break;
+      case 'fidelidapp:action:clear':
+        hasAction = false;
+        refreshActionsBar();
+        break;
+      case 'fidelidapp:back':
+        backVisible = !!data.visible;
+        refreshActionsBar();
+        break;
+      case 'fidelidapp:modal':
+        modalInsideOpen = !!data.open;
+        refreshActionsBar();
+        break;
+    }
+  });
+
+  // Swipe-to-close en el handle (mobile)
+  if (handle && sheet) {
+    let startY = 0;
+    let dragging = false;
+    handle.addEventListener('touchstart', (e) => {
+      startY = e.touches[0].clientY;
+      dragging = true;
+      sheet.style.transition = 'none';
+    }, { passive: true });
+    handle.addEventListener('touchmove', (e) => {
+      if (!dragging) return;
+      const dy = e.touches[0].clientY - startY;
+      if (dy > 0) sheet.style.transform = `translateY(${dy}px)`;
+    }, { passive: true });
+    handle.addEventListener('touchend', (e) => {
+      if (!dragging) return;
+      dragging = false;
+      sheet.style.transition = '';
+      const dy = e.changedTouches[0].clientY - startY;
+      sheet.style.transform = '';
+      if (dy > 80) closeAgenda();
+    });
+  }
+</script>

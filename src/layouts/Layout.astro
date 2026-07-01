@@ -1,4 +1,6 @@
 ---
+import AgendaModal from '../components/AgendaModal.astro';
+
 export interface Props {
   title: string;
   description?: string;
@@ -34,7 +36,7 @@ const { title, description = "Dra. Carolina Oyarzún - Especialista en Estética
       "telephone": "+56986030096",
       "address": {
         "@type": "PostalAddress",
-        "streetAddress": "Tres Nte. 23",
+        "streetAddress": "Cam. Las Rastras 1285, Oficina 401",
         "addressLocality": "Talca",
         "addressRegion": "Maule",
         "postalCode": "3460000",
@@ -91,7 +93,7 @@ const { title, description = "Dra. Carolina Oyarzún - Especialista en Estética
   height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
   <!-- End Google Tag Manager (noscript) -->
     <!-- Floating WhatsApp Button -->
-    <div class="fixed bottom-6 right-6 z-50">
+    <div id="whatsapp-float" class="fixed bottom-6 right-6 z-50">
       <a
         href="https://wa.me/56986030096"
         target="_blank"
@@ -110,6 +112,9 @@ const { title, description = "Dra. Carolina Oyarzún - Especialista en Estética
         </div>
       </a>
     </div>
+
+    <!-- Modal de agenda embebida -->
+    <AgendaModal />
   </body>
 </html>
 
