@@ -8,8 +8,12 @@ export interface Props {
   eyebrow?: string;
   title: string;
   subtitle: string;
-  tagline?: string;
+  lead?: string;
+  description?: string;
+  benefitsTitle?: string;
   benefits: string[];
+  note?: string;
+  tagline?: string;
   image: ImageMetadata;
   imageAlt: string;
   ctaText: string;
@@ -22,8 +26,12 @@ const {
   eyebrow = 'Producto Destacado',
   title,
   subtitle,
-  tagline,
+  lead,
+  description,
+  benefitsTitle,
   benefits,
+  note,
+  tagline,
   image,
   imageAlt,
   ctaText,
@@ -51,17 +59,29 @@ const sectionClasses = background === 'soft'
             {title}
           </h2>
 
-          <p class="text-xl text-gray-600 mb-4">
+          <p class="text-xl text-gray-600 mb-5">
             {subtitle}
           </p>
 
-          {tagline && (
-            <p class="text-sm text-gray-500 italic mb-6">
-              {tagline}
+          {lead && (
+            <p class="text-lg font-semibold text-gray-800 mb-3">
+              {lead}
             </p>
           )}
 
-          <ul class="space-y-3 mb-8">
+          {description && (
+            <p class="text-gray-600 leading-relaxed mb-6">
+              {description}
+            </p>
+          )}
+
+          {benefitsTitle && (
+            <h3 class="font-semibold text-gray-900 mb-4">
+              {benefitsTitle}
+            </h3>
+          )}
+
+          <ul class="space-y-3 mb-6">
             {benefits.map((benefit) => (
               <li class="flex items-start space-x-3">
                 <div class="w-6 h-6 bg-highlight rounded-full flex items-center justify-center flex-shrink-0 mt-0.5">
@@ -74,10 +94,22 @@ const sectionClasses = background === 'soft'
             ))}
           </ul>
 
+          {note && (
+            <p class="bg-highlight/10 border-l-4 border-highlight rounded-r-lg text-gray-700 text-sm leading-relaxed py-3 px-4 mb-6">
+              {note}
+            </p>
+          )}
+
           <Button href={href} target="_blank" rel="noopener noreferrer">
             <span class="mr-2">🗓️</span>
             {ctaText}
           </Button>
+
+          {tagline && (
+            <p class="text-sm text-gray-500 italic mt-5">
+              {tagline}
+            </p>
+          )}
         </div>
 
         <!-- Flyer -->
