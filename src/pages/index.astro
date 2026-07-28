@@ -2,7 +2,9 @@
 import Layout from '../layouts/Layout.astro';
 import Header from '../components/Header.astro';
 import Hero from '../components/Hero.astro';
-import FeaturedService from '../components/FeaturedService.astro';
+import FeaturedProduct from '../components/FeaturedProduct.astro';
+import sculptraFlyer from '../assets/Promos/sculptra.jpeg';
+import toxinaFlyer from '../assets/Promos/toxina-botulinica.png';
 import Benefits from '../components/Benefits.astro';
 import Testimonials from '../components/Testimonials.astro';
 import Services from '../components/Services.astro';
@@ -21,7 +23,43 @@ import Footer from '../components/Footer.astro';
   
   <main class="lg:pt-8">
     <Hero />
-    <FeaturedService />
+
+    <FeaturedProduct
+      id="sculptra"
+      title="Sculptra"
+      subtitle="Bioestimulador de Colágeno"
+      tagline="Resultados que se ven, confianza que se siente"
+      benefits={[
+        'Estimula la producción natural de colágeno',
+        'Mejora la firmeza y elasticidad de la piel',
+        'Resultados progresivos y naturales',
+        'Efecto de larga duración'
+      ]}
+      image={sculptraFlyer}
+      imageAlt="Promoción Sculptra, bioestimulador de colágeno con ácido poliláctico, en Dra. Oyarzún Talca"
+      ctaText="Agenda tu evaluación"
+      href="https://www.fidelidapp.cl/agendalanding/68c44056670f3153316c7f88"
+      background="white"
+    />
+
+    <FeaturedProduct
+      id="servicio-destacado"
+      title="Toxina Botulínica"
+      subtitle="Promociones vigentes"
+      tagline="Resultados que se ven, confianza que se siente"
+      benefits={[
+        'Toxina botulínica 3 zonas con Botox® o Reage (Abbott)',
+        'Opción de sumar mesoterapia Lumicen o Pink Glow',
+        'Resultados naturales, sin rostro rígido',
+        'Evaluación personalizada antes del procedimiento'
+      ]}
+      image={toxinaFlyer}
+      imageAlt="Promociones de toxina botulínica: packs de 3 zonas con mesoterapia, en Dra. Oyarzún Talca"
+      ctaText="Agenda tu evaluación"
+      href="https://www.fidelidapp.cl/agendalanding/68c44056670f3153316c7f88"
+      background="soft"
+    />
+
     <Testimonials />
     <Benefits />
     <Services />
