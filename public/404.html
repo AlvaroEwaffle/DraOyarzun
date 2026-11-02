@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Página no encontrada - Dra. Carolina Oyarzún</title>
+    <link rel="icon" type="image/png" href="/assets/Logo.png" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet" />
+    <style>
+      :root {
+        --main: #a2d2ff;
+        --details: #bde0fe;
+        --highlight: #ffc8dd;
+        --hover: #ffafcc;
+      }
+      * { box-sizing: border-box; }
+      body {
+        margin: 0;
+        min-height: 100vh;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        padding: 24px;
+        font-family: 'Inter', system-ui, sans-serif;
+        color: #111827;
+        background: linear-gradient(135deg, rgba(162, 210, 255, 0.25), rgba(255, 200, 221, 0.25));
+      }
+      .card {
+        width: 100%;
+        max-width: 520px;
+        text-align: center;
+        background: #fff;
+        border-radius: 24px;
+        padding: 48px 32px;
+        box-shadow: 0 20px 40px rgba(17, 24, 39, 0.08);
+      }
+      img { height: 64px; width: auto; }
+      h1 { font-size: 1.75rem; font-weight: 700; margin: 24px 0 12px; }
+      p { color: #4b5563; line-height: 1.6; margin: 0 0 32px; }
+      .actions { display: flex; flex-direction: column; gap: 12px; }
+      a {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        gap: 8px;
+        padding: 14px 28px;
+        border-radius: 9999px;
+        font-weight: 600;
+        text-decoration: none;
+        transition: transform 0.2s ease, background-color 0.2s ease;
+      }
+      a:hover { transform: scale(1.03); }
+      .primary { background: var(--highlight); color: #111827; }
+      .primary:hover { background: var(--hover); }
+      .secondary { background: #fff; color: #111827; border: 2px solid var(--main); }
+      .secondary:hover { background: var(--main); }
+      @media (min-width: 480px) { .actions { flex-direction: row; justify-content: center; } }
+    </style>
+  </head>
+  <body>
+    <main class="card">
+      <img src="/assets/Logo.png" alt="Dra. Carolina Oyarzún" />
+      <h1>No encontramos esta página</h1>
+      <p>Puede que el enlace esté desactualizado o que hayamos movido el contenido. En el inicio encontrarás todos los tratamientos.</p>
+      <div class="actions">
+        <a class="primary" href="/">Ir al inicio</a>
+        <a class="secondary" href="https://wa.me/56986030096" target="_blank" rel="noopener noreferrer">Escríbenos por WhatsApp</a>
+      </div>
+    </main>
+  </body>
+</html>
