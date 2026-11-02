@@ -7,6 +7,9 @@ export interface Props {
 }
 
 const { title, description = "Dra. Carolina Oyarzún - Especialista en Estética Facial en Talca. Tratamiento de líneas de expresión, ácido hialurónico y tratamientos de armonización facial." } = Astro.props;
+
+// URL canonica de ESTA pagina (Astro.site = `site` del config).
+const canonicalURL = new URL(Astro.url.pathname, Astro.site);
 ---
 
 <!DOCTYPE html>
@@ -23,7 +26,7 @@ const { title, description = "Dra. Carolina Oyarzún - Especialista en Estética
     <meta name="keywords" content="estética facial, ácido hialurónico, armonización facial, Talca, Dra. Oyarzún, rejuvenecimiento facial, rellenos faciales, contorno facial" />
     <meta name="author" content="Dra. Carolina Oyarzún" />
     <meta name="robots" content="index, follow" />
-    <link rel="canonical" href="https://doctoraoyarzun.cl/" />
+    <link rel="canonical" href={canonicalURL} />
     
     <!-- Structured Data -->
     <script type="application/ld+json">
@@ -64,14 +67,14 @@ const { title, description = "Dra. Carolina Oyarzún - Especialista en Estética
     
     <!-- Open Graph / Facebook -->
     <meta property="og:type" content="website" />
-    <meta property="og:url" content="https://doctoraoyarzun.cl/" />
+    <meta property="og:url" content={canonicalURL} />
     <meta property="og:title" content={title} />
     <meta property="og:description" content={description} />
     <meta property="og:image" content="https://doctoraoyarzun.cl/og-image.jpg" />
 
     <!-- Twitter -->
     <meta property="twitter:card" content="summary_large_image" />
-    <meta property="twitter:url" content="https://doctoraoyarzun.cl/" />
+    <meta property="twitter:url" content={canonicalURL} />
     <meta property="twitter:title" content={title} />
     <meta property="twitter:description" content={description} />
     <meta property="twitter:image" content="https://doctoraoyarzun.cl/og-image.jpg" />
