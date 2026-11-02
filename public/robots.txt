@@ -1,5 +1,5 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://www.doctoraoyarzun.cl/sitemap.xml
+Sitemap: https://doctoraoyarzun.cl/sitemap-index.xml
 
