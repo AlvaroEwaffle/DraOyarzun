@@ -17,7 +17,7 @@ export const services = [
     title: 'Tratamientos de arrugas y expresión',
     icon: '✨',
     services: [
-      'Toxina Botulínica'
+      'Líneas de expresión'
     ],
     description: 'Elimina las arrugas de expresión de forma natural y segura, manteniendo tu rostro fresco y relajado.'
   },
@@ -82,7 +82,7 @@ export const testimonials = [
   {
     name: 'María González',
     age: '42 años',
-    treatment: 'Toxina Botulínica',
+    treatment: 'Líneas de expresión',
     text: 'La Dra. Oyarzún es increíble. Me ayudó a recuperar mi confianza con un tratamiento muy natural. Se nota su experiencia y profesionalismo.',
     rating: 5
   },
@@ -109,7 +109,7 @@ export const faqs = [
   },
   {
     question: '¿Cuánto tiempo duran los resultados?',
-    answer: 'Los resultados varían según el tratamiento. La toxina botulínica dura entre 4-6 meses, mientras que el ácido hialurónico puede durar entre 8-12 meses. Te explicaremos los tiempos específicos en tu consulta.'
+    answer: 'Los resultados varían según el tratamiento. El tratamiento de líneas de expresión dura entre 4-6 meses, mientras que el ácido hialurónico puede durar entre 8-12 meses. Te explicaremos los tiempos específicos en tu consulta.'
   },
   {
     question: '¿Hay algún riesgo en los tratamientos?',
